@@ -6,7 +6,7 @@
 #include <vector>
 using namespace std;
 int main(){
-	float one, two;
+	float one, two, ruleandno, resultandyes;
   int length;
   double* pint;
   length = 0;
@@ -21,6 +21,19 @@ int main(){
   } while (!plik.eof());
   length=w.size();
   cout << length;
+
+
+  pint = nullptr;
+  ifstream plikrule;
+  plikrule.open("rules.txt");
+  vector<pair<string, string>> s;
+  do {
+	  plik >> ruleandno;
+	  plik >> resultandyes;
+	  w.push_back({ ruleandno, resultandyes });
+  } while (!plik.eof());
+
+
   ofstream plikprim;
   plikprim.open("Results.txt");
   for (int i = 0; i < length; i++) {
@@ -37,3 +50,4 @@ int main(){
 	  }
   }
 }
+
