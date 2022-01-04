@@ -4,50 +4,139 @@
 #include <fstream>
 #include <sstream> 
 #include <vector>
+//#include "FileModel.h"
 using namespace std;
-int main(){
-	float one, two, ruleandno, resultandyes;
-  int length;
-  double* pint;
-  length = 0;
-  pint = nullptr;
-  ifstream plik;
-  plik.open("Values.txt");
-  vector<pair<float, float>> w;
-  do {
-	  plik >> one;
-	  plik >> two;
-	  w.push_back({ one, two });
-  } while (!plik.eof());
-  length=w.size();
-  cout << length;
+int main() {
+	float value, valueprime, one, two;
+	int length;
+	double* pint;
+	string rule;
+	length = 0;
+	pint = nullptr;
+	ifstream plik;
+	plik.open("Values.txt");
+	vector<pair<float, float>> w;
+	do {
+		plik >> one;
+		plik >> two;
+		w.push_back({ one, two });
+	} while (!plik.eof());
+	length = w.size();
+	cout << length;
 
 
-  pint = nullptr;
-  ifstream plikrule;
-  plikrule.open("rules.txt");
-  vector<pair<string, string>> s;
-  do {
-	  plik >> ruleandno;
-	  plik >> resultandyes;
-	  w.push_back({ ruleandno, resultandyes });
-  } while (!plik.eof());
+	ifstream plikdwa;
+	plikdwa.open("Rules.txt");
+	vector<string> p;
+	do {
+		plikdwa >> rule;
+		p.push_back({ rule });
+	} while (!plikdwa.eof());
 
+	value = stof(p[3]);
+	valueprime = stof(p[9]);
+	ofstream plikprim;
+	plikprim.open("Results.txt");
+	if (p[2] == ">") {
+		for (int j =0; j < length; j++) {
+			if (w[j].first > value) {
+				plikprim << p[5] << endl;
+			}
+			else {
+				if (p[8] == ">") {
+					if (w[j].second > valueprime) {
+						plikprim << p[11] << endl;
+					}
+					else {
+						plikprim << p[10] << endl;
+					}
+				}
+				if (p[8] == "=") {
+					if (w[j].second = valueprime) {
+						plikprim << p[11] << endl;
+					}
+					else {
+						plikprim << p[10] << endl;
+					}
+				}
+				if (p[8] == "<") {
+					if (w[j].second < valueprime) {
+						plikprim << p[11] << endl;
+					}
+					else {
+						plikprim << p[10] << endl;
+					}
+				}
+			}
 
-  ofstream plikprim;
-  plikprim.open("Results.txt");
-  for (int i = 0; i < length; i++) {
-	  if (w[i].first > 190.0) {
-		  plikprim << "basketball"<<endl;
-	  }
-	  else{
-		  if (w[i].second > 50) {
-			  plikprim << "basketball" << endl;
-		  }
-		  else {
-			  plikprim << "athletics" << endl;
-		  }
-	  }
-  }
+		}
+	}
+	if (p[2] == "=") {
+		for (int j = 0; j < length; j++) {
+			if (w[j].first = value) {
+				plikprim << p[5] << endl;
+			}
+			else {
+				if (p[8] == ">") {
+					if (w[j].second > valueprime) {
+						plikprim << p[11] << endl;
+					}
+					else {
+						plikprim << p[10] << endl;
+					}
+				}
+				if (p[8] == "=") {
+					if (w[j].second = valueprime) {
+						plikprim << p[11] << endl;
+					}
+					else {
+						plikprim << p[10] << endl;
+					}
+				}
+				if (p[8] == "<") {
+					if (w[j].second < valueprime) {
+						plikprim << p[11] << endl;
+					}
+					else {
+						plikprim << p[10] << endl;
+					}
+				}
+			}
+
+		}
+	}
+	if (p[2] == "<") {
+		for (int j = 0; j < length; j++) {
+			if (w[j].first < value) {
+				plikprim << p[5] << endl;
+			}
+			else {
+				if (p[8] == ">") {
+					if (w[j].second > valueprime) {
+						plikprim << p[11] << endl;
+					}
+					else {
+						plikprim << p[10] << endl;
+					}
+				}
+				if (p[8] == "=") {
+					if (w[j].second = valueprime) {
+						plikprim << p[11] << endl;
+					}
+					else {
+						plikprim << p[10] << endl;
+					}
+				}
+				if (p[8] == "<") {
+					if (w[j].second < valueprime) {
+						plikprim << p[11] << endl;
+					}
+					else {
+						plikprim << p[10] << endl;
+					}
+				}
+			}
+
+		}
+	}	
 }
-
