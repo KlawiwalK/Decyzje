@@ -14,7 +14,7 @@ int main() {
 	length = 0;
 	pint = nullptr;
 	ifstream plik;
-	plik.open("Values.txt");
+	plik.open("Values");
 	vector<pair<float, float>> w;
 	do {
 		plik >> one;
@@ -26,7 +26,7 @@ int main() {
 
 
 	ifstream plikdwa;
-	plikdwa.open("Rules.txt");
+	plikdwa.open("Rules");
 	vector<string> p;
 	do {
 		plikdwa >> rule;
@@ -36,7 +36,7 @@ int main() {
 	value = stof(p[3]);
 	valueprime = stof(p[9]);
 	ofstream plikprim;
-	plikprim.open("Results.txt");
+	plikprim.open("Results");
 	if (p[2] == ">") {
 		for (int j =0; j < length; j++) {
 			if (w[j].first > value) {
