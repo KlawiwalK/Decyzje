@@ -4,139 +4,183 @@
 #include <fstream>
 #include <sstream> 
 #include <vector>
-//#include "FileModel.h"
 using namespace std;
 int main() {
 	float value, valueprime, one, two;
 	int length;
 	double* pint;
-	string rule;
+	string znak, znakprim, rule, onen, twot, wynik1, wynik2, wynik3;
 	length = 0;
 	pint = nullptr;
 	ifstream plik;
-	plik.open("Values");
+	plik.open("Values.txt");
+	vector<pair<string, string>>l;
+	plik >> onen >> twot;
 	vector<pair<float, float>> w;
 	do {
 		plik >> one;
 		plik >> two;
-		w.push_back({ one, two });
+		w.push_back({ one, two }); //Reads data from values.txt to a vector of float pairs, until the file is over.
 	} while (!plik.eof());
 	length = w.size();
 	cout << length;
 
 
+
+
 	ifstream plikdwa;
-	plikdwa.open("Rules");
+	plikdwa.open("Rules.txt");
 	vector<string> p;
 	do {
 		plikdwa >> rule;
-		p.push_back({ rule });
+		p.push_back({ rule }); // Reads data from rules.txt to a vector of strings, which will be used for the Grand Finale of this code.
 	} while (!plikdwa.eof());
+	cout << length << endl;
 
-	value = stof(p[3]);
-	valueprime = stof(p[9]);
+
+
+
+	znak = p[2]; //Types the equality or inequality mark from the first condition into a "znak" variable
+	znakprim = p[8]; //Types the equality or inequality mark from the second rule condition a "znakprim" variable
+	value = stof(p[3]); //Changes the value from the first rule condition a float and puts it as a "value" variable
+	valueprime = stof(p[9]); //Changes the value from the second condition into a float and puts it as a "valueprime" variable
+	wynik1 = p[5]; // Positive result of the first condition, changed into a slightly more friendly for eyes variable.
+	wynik2 = p[11]; // Positive result of the second condition, changed into a slightly more friendly for eyes variable, just like before.
+	wynik3 = p[10]; // The same as the one above, but a negative result instead of a positive one.
+
+
+
+
 	ofstream plikprim;
-	plikprim.open("Results");
-	if (p[2] == ">") {
-		for (int j =0; j < length; j++) {
-			if (w[j].first > value) {
-				plikprim << p[5] << endl;
-			}
-			else {
-				if (p[8] == ">") {
-					if (w[j].second > valueprime) {
-						plikprim << p[11] << endl;
-					}
-					else {
-						plikprim << p[10] << endl;
-					}
-				}
-				if (p[8] == "=") {
-					if (w[j].second = valueprime) {
-						plikprim << p[11] << endl;
-					}
-					else {
-						plikprim << p[10] << endl;
-					}
-				}
-				if (p[8] == "<") {
-					if (w[j].second < valueprime) {
-						plikprim << p[11] << endl;
-					}
-					else {
-						plikprim << p[10] << endl;
-					}
-				}
-			}
-
-		}
-	}
-	if (p[2] == "=") {
+	plikprim.open("Results.txt"); //Hell begins, here we go...
+	if (znak == ">") { //If mark from the first condition is this one, checks if it is true.
 		for (int j = 0; j < length; j++) {
-			if (w[j].first = value) {
-				plikprim << p[5] << endl;
+			if (w[j].first > value) {
+				plikprim << wynik1 << endl; //If true, writes the result into results.txt...
+				cout << wynik1 << endl;  //...And writes it into the console before going back to the beginning of this abomination.
 			}
-			else {
-				if (p[8] == ">") {
+			else { //If not true, checks the inequality or equality mark in the second condition.
+				if (znakprim == ">") {
 					if (w[j].second > valueprime) {
-						plikprim << p[11] << endl;
+						plikprim << wynik2 << endl; //And writes it into results.txt and console depending if it is positive...
+						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << p[10] << endl;
+						plikprim << wynik3 << endl; //... Or negative.
+						cout << wynik3 << endl;
 					}
 				}
-				if (p[8] == "=") {
+				if (znakprim == "=") {
 					if (w[j].second = valueprime) {
-						plikprim << p[11] << endl;
+						plikprim << wynik2 << endl;
+						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << p[10] << endl;
+						plikprim << wynik3 << endl;
+						cout << wynik3 << endl;
 					}
 				}
-				if (p[8] == "<") {
+				if (znakprim == "<") {
 					if (w[j].second < valueprime) {
-						plikprim << p[11] << endl;
+						plikprim << wynik2 << endl;
+						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << p[10] << endl;
+						plikprim << wynik3 << endl;
+						cout << wynik3 << endl;
 					}
 				}
 			}
 
 		}
 	}
-	if (p[2] == "<") {
+
+
+
+	if (znak == "=") { //The same as before, but in case the equality/inequality mark is different, but code will do the same job.
+		for (int j = 0; j < length; j++) {
+			if (w[j].first = value) { //Checks if the first condition is correct...
+				plikprim << wynik1 << endl; //And if yes, writes it into results.txt
+				cout << wynik1 << endl; //And console
+			}
+			else {
+				if (znakprim == ">") { //If not, checks for every other possibility.
+					if (w[j].second > valueprime) {
+						plikprim << wynik2 << endl;
+						cout << wynik2 << endl;
+					}
+					else {
+						plikprim << wynik3 << endl;
+						cout << wynik3 << endl;
+					}
+				}
+				if (znakprim == "=") {
+					if (w[j].second = valueprime) {
+						plikprim << wynik2 << endl;
+						cout << wynik2 << endl;
+					}
+					else {
+						plikprim << wynik3 << endl;
+						cout << wynik3 << endl;
+					}
+				}
+				if (znakprim == "<") {
+					if (w[j].second < valueprime) {
+						plikprim << wynik2 << endl;
+						cout << wynik2 << endl;
+					}
+					else {
+						plikprim << wynik3 << endl;
+						cout << wynik3 << endl;
+					}
+				}
+			}
+
+		}
+	}
+
+
+
+	if (znak == "<") { //And the same for the third possible mark or equality/inequality.
 		for (int j = 0; j < length; j++) {
 			if (w[j].first < value) {
-				plikprim << p[5] << endl;
+				plikprim << wynik1 << endl;
+				cout << wynik1 << endl;
 			}
 			else {
-				if (p[8] == ">") {
+				if (znakprim == ">") {
 					if (w[j].second > valueprime) {
-						plikprim << p[11] << endl;
+						plikprim << wynik2 << endl; // Is anyone still reading this?
+						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << p[10] << endl;
+						plikprim << wynik3 << endl;
+						cout << wynik3 << endl;
 					}
 				}
-				if (p[8] == "=") {
+				if (znakprim == "=") {
 					if (w[j].second = valueprime) {
-						plikprim << p[11] << endl;
+						plikprim << wynik2 << endl;
+						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << p[10] << endl;
+						plikprim << wynik3 << endl;
+						cout << wynik3 << endl;
 					}
 				}
-				if (p[8] == "<") {
+				if (znakprim == "<") {
 					if (w[j].second < valueprime) {
-						plikprim << p[11] << endl;
+						plikprim << wynik2 << endl;
+						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << p[10] << endl;
-					}
+						plikprim << wynik3 << endl;
+						cout << wynik3 << endl;
+					} //If so, congratulations, it is the end of this code.
+
 				}
 			}
 
 		}
-	}	
+	}
 }
