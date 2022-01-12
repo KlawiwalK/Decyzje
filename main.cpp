@@ -7,7 +7,7 @@
 using namespace std;
 int main() {
 	float value, valueprime, one, two;
-	int length;
+	int length, lengthprim;
 	double* pint;
 	string znak, znakprim, rule, onen, twot, wynik1, wynik2, wynik3;
 	length = 0;
@@ -24,6 +24,10 @@ int main() {
 	} while (!plik.eof());
 	length = w.size();
 	cout << length;
+	if (length == 0) {
+		cout << "If you want to use this properly, then you should put some values in the values.txt in pairs, which will allows the program to compare them.";
+		return 0;
+	}
 
 
 
@@ -35,9 +39,13 @@ int main() {
 		plikdwa >> rule;
 		p.push_back({ rule }); // Reads data from rules.txt to a vector of strings, which will be used for the Grand Finale of this code.
 	} while (!plikdwa.eof());
-	cout << length << endl;
-
-
+	lengthprim = p.size();
+	if (lengthprim == 0) {
+		cout << "No rules? You need to put rules in rules.txt in a form like this:" << endl;
+		cout << "0, name of a compared value, equality or inequality mark, value for the condition which has to be met, goto1(result if false), result if true" << endl;
+		cout << "1, name of a compared value, equality or inequality mark, value for the condition which has to be met, result if false, result if true";
+		return 0;
+	}
 
 
 	znak = p[2]; //Types the equality or inequality mark from the first condition into a "znak" variable
@@ -184,3 +192,4 @@ int main() {
 		}
 	}
 }
+
