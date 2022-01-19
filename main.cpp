@@ -13,41 +13,33 @@ int main() {
 	string znak, znakprim, rule, result1, result2, onen, twot, wynik1, wynik2, wynik3;
 	length = 0;
 	pint = nullptr;
+	vector<pair<float, float>> w;
+	vector<string> p;
 	ifstream plik;
 	plik.open("Values.txt");
-	vector<pair<string, string>>l;
-	plik >> onen >> twot;
-	vector<pair<float, float>> w;
-	do {
-		plik >> one;
-		plik >> two;
-		w.push_back({ one, two }); //Reads data from values.txt to a vector of float pairs, until the file is over.
-	} while (!plik.eof());
-	length = w.size();
-	cout << length;
-	if (length == 0) {
-		cout << "If you want to use this properly, then you should put some values in the values.txt in pairs, which will allows the program to compare them.";
-		return 0;
+	if (plik.is_open()) {
+		if (plik.eof() == true) {
+			cout << "If you want to use this properly, then you should put some values in the values.txt in pairs, which will allows the program to compare them.";
+			return 0;
+		}
+		vector<pair<string, string>>;
+		plik >> onen >> twot;
+		do {
+			plik >> one;
+			plik >> two;
+			w.push_back({ one, two }); //Reads data from values.txt to a vector of float pairs, until the file is over.
+		} while (!plik.eof());
+		length = w.size();
+		cout << length;
 	}
 
-
-
-
+	
 	ifstream plikdwa;
 	plikdwa.open("Rules.txt");
-	vector<string> p;
 	do {
 		plikdwa >> rule;
 		p.push_back({ rule }); // Reads data from rules.txt to a vector of strings, which will be used for the Grand Finale of this code.
 	} while (!plikdwa.eof());
-	lengthprim = p.size();
-	if (lengthprim == 0) {
-		cout << "No rules? You need to put rules in rules.txt in a form like this:" << endl;
-		cout << "0, name of a compared value, equality or inequality mark, value for the condition which has to be met, goto1(result if false), result if true" << endl;
-		cout << "1, name of a compared value, equality or inequality mark, value for the condition which has to be met, result if false, result if true";
-		return 0;
-	}
-
 
 	znak = p[2]; //Types the equality or inequality mark from the first condition into a "znak" variable
 	znakprim = p[8]; //Types the equality or inequality mark from the second rule condition a "znakprim" variable
