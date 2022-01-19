@@ -6,10 +6,11 @@
 #include <vector>
 using namespace std;
 int main() {
+	
 	float value, valueprime, one, two;
-	int length, lengthprim;
+	int length, lengthprim, lengthresult1, lengthresult2;
 	double* pint;
-	string znak, znakprim, rule, onen, twot, wynik1, wynik2, wynik3;
+	string znak, znakprim, rule, result1, result2, onen, twot, wynik1, wynik2, wynik3;
 	length = 0;
 	pint = nullptr;
 	ifstream plik;
@@ -58,44 +59,48 @@ int main() {
 
 
 
+	vector<pair<float, float>> firstresult;
+	vector<pair<float, float>> secondresult;
+
+
 
 	ofstream plikprim;
 	plikprim.open("Results.txt"); //Hell begins, here we go...
 	if (znak == ">") { //If mark from the first condition is this one, checks if it is true.
 		for (int j = 0; j < length; j++) {
 			if (w[j].first > value) {
-				plikprim << wynik1 << endl; //If true, writes the result into results.txt...
-				cout << wynik1 << endl;  //...And writes it into the console before going back to the beginning of this abomination.
+				firstresult.push_back({ w[j].first, w[j].second });
+				cout << wynik1 << endl; 
 			}
 			else { //If not true, checks the inequality or equality mark in the second condition.
 				if (znakprim == ">") {
 					if (w[j].second > valueprime) {
-						plikprim << wynik2 << endl; //And writes it into results.txt and console depending if it is positive...
+						firstresult.push_back({ w[j].first, w[j].second });
 						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << wynik3 << endl; //... Or negative.
+						secondresult.push_back({ w[j].first, w[j].second });
 						cout << wynik3 << endl;
 					}
 				}
 				if (znakprim == "=") {
 					if (w[j].second = valueprime) {
-						plikprim << wynik2 << endl;
+						firstresult.push_back({ w[j].first, w[j].second });
 						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << wynik3 << endl;
+						secondresult.push_back({ w[j].first, w[j].second });
 						cout << wynik3 << endl;
 					}
 				}
 				if (znakprim == "<") {
 					if (w[j].second < valueprime) {
-						plikprim << wynik2 << endl;
+						firstresult.push_back({ w[j].first, w[j].second });
 						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << wynik3 << endl;
 						cout << wynik3 << endl;
+						secondresult.push_back({ w[j].first, w[j].second });
 					}
 				}
 			}
@@ -107,39 +112,39 @@ int main() {
 
 	if (znak == "=") { //The same as before, but in case the equality/inequality mark is different, but code will do the same job.
 		for (int j = 0; j < length; j++) {
-			if (w[j].first = value) { //Checks if the first condition is correct...
-				plikprim << wynik1 << endl; //And if yes, writes it into results.txt
-				cout << wynik1 << endl; //And console
+			if (w[j].first = value) { //Checks if the first condition is correct.
+				firstresult.push_back({ w[j].first, w[j].second });
+				cout << wynik1 << endl; 
 			}
 			else {
 				if (znakprim == ">") { //If not, checks for every other possibility.
 					if (w[j].second > valueprime) {
-						plikprim << wynik2 << endl;
+						firstresult.push_back({ w[j].first, w[j].second });
 						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << wynik3 << endl;
 						cout << wynik3 << endl;
+						secondresult.push_back({ w[j].first, w[j].second });
 					}
 				}
 				if (znakprim == "=") {
 					if (w[j].second = valueprime) {
-						plikprim << wynik2 << endl;
+						firstresult.push_back({ w[j].first, w[j].second });
 						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << wynik3 << endl;
 						cout << wynik3 << endl;
+						secondresult.push_back({ w[j].first, w[j].second });
 					}
 				}
 				if (znakprim == "<") {
 					if (w[j].second < valueprime) {
-						plikprim << wynik2 << endl;
 						cout << wynik2 << endl;
+						firstresult.push_back({ w[j].first, w[j].second });
 					}
 					else {
-						plikprim << wynik3 << endl;
 						cout << wynik3 << endl;
+						secondresult.push_back({ w[j].first, w[j].second });
 					}
 				}
 			}
@@ -152,44 +157,54 @@ int main() {
 	if (znak == "<") { //And the same for the third possible mark or equality/inequality.
 		for (int j = 0; j < length; j++) {
 			if (w[j].first < value) {
-				plikprim << wynik1 << endl;
+				firstresult.push_back({ w[j].first, w[j].second });
 				cout << wynik1 << endl;
 			}
 			else {
 				if (znakprim == ">") {
 					if (w[j].second > valueprime) {
-						plikprim << wynik2 << endl; // Is anyone still reading this?
+						firstresult.push_back({ w[j].first, w[j].second });// Is anyone still reading this?
 						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << wynik3 << endl;
 						cout << wynik3 << endl;
+						secondresult.push_back({ w[j].first, w[j].second });
 					}
 				}
 				if (znakprim == "=") {
 					if (w[j].second = valueprime) {
-						plikprim << wynik2 << endl;
+						firstresult.push_back({ w[j].first, w[j].second });
 						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << wynik3 << endl;
 						cout << wynik3 << endl;
+						secondresult.push_back({ w[j].first, w[j].second });
 					}
 				}
 				if (znakprim == "<") {
 					if (w[j].second < valueprime) {
-						plikprim << wynik2 << endl;
+						firstresult.push_back({ w[j].first, w[j].second });
 						cout << wynik2 << endl;
 					}
 					else {
-						plikprim << wynik3 << endl;
 						cout << wynik3 << endl;
-					} //If so, congratulations, it is the end of this code.
+						secondresult.push_back({ w[j].first, w[j].second });
+					} //If so, congratulations, it is almost the end of this code.
 
 				}
 			}
 
 		}
 	}
-}
+	lengthresult1 = firstresult.size();
+	lengthresult2 = secondresult.size();
+	plikprim << wynik1 << endl;
+	for (int i = 0; i < lengthresult1; i++) {
+		plikprim << firstresult[i].first<<" "<< firstresult[i].second << endl;
+	}
+	plikprim << wynik3 << endl;
+	for (int i = 0; i < lengthresult1; i++) {
+		plikprim << secondresult[i].first << " " << secondresult[i].second << endl;
+	}
 
+}
