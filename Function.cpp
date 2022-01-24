@@ -1,13 +1,13 @@
 #include <iostream> 
-#include <random>
-#include <chrono>
 #include <fstream>
 #include <sstream> 
 #include <vector>
 #include "FileModel.h"
 using namespace std;
-vector<pair<float,float>> Openvalues(string onen, string twot, int &length, int one, int two) {
+vector<pair<float,float>> Openvalues(int &length) {
 	ifstream plik;
+	int one, two;
+	string onen, twot;
 	plik.open("Values.txt");
 	if (plik.is_open()) {
 		if (plik.eof() == true) {
@@ -27,8 +27,9 @@ vector<pair<float,float>> Openvalues(string onen, string twot, int &length, int 
 		return w;
 	}
 }
-vector<string> Setrules(string rule, string &znak, string &znakprim, float &value, float &valueprime, string &wynik1, string &wynik2, string &wynik3) {
+void Setrule(string &znak, string &znakprim, float &value, float &valueprime, string &wynik1, string &wynik2, string &wynik3) {
 	ifstream plikdwa;
+	string rule;
 	plikdwa.open("Rules.txt");
 	vector<string> p;
 	do {
@@ -43,20 +44,17 @@ vector<string> Setrules(string rule, string &znak, string &znakprim, float &valu
 	wynik1 = p[5]; // Positive result of the first condition, changed into a slightly more friendly for eyes variable.
 	wynik2 = p[11]; // Positive result of the second condition, changed into a slightly more friendly for eyes variable, just like before.
 	wynik3 = p[10]; // The same as the one above, but a negative result instead of a positive one.
-	return p;
 }
 
 
 
 
 
-vector<pair<float, float>> Variables(string znak, string znakprim, int length, float value, float valueprime, string wynik1, string wynik2, string wynik3) {
+void Variables(vector<pair<float, float>> w,string znak, string znakprim, int length, float value, float valueprime, string wynik1, string wynik2, string wynik3) {
 	ofstream plikprim;
 	plikprim.open("Results.txt"); //Hell begins, here we go...
 	vector<pair<float, float>> firstresult;
 	vector<pair<float, float>> secondresult;
-	vector<vector<pair<float, float>>> wektorow;
-	vector<pair<float, float>> w;
 	if (znak == ">") { //If mark from the first condition is this one, checks if it is true.
 		for (int j = 0; j < length; j++) {
 			if (w[j].first > value) {
@@ -189,12 +187,6 @@ vector<pair<float, float>> Variables(string znak, string znakprim, int length, f
 		}
 
 	}
-	return firstresult;
-
-}
-void Dividing(vector<pair<float, float>>firstresult, vector<pair<float, float>>secondresult , string wynik1, string wynik3) {
-	ofstream plikprim;
-	plikprim.open("Results.txt");
 	int lengthresult1 = firstresult.size();
 	int lengthresult2 = secondresult.size();
 	plikprim << wynik1 << endl;
