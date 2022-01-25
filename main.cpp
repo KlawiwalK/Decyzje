@@ -2,10 +2,10 @@
 #include <fstream>
 #include <sstream> 
 #include <vector>
-#include "FileModel.h"
+#include "Function.h"
 using namespace std;
 int main() {
-	float value, valueprime;
+	float value, valueprime, one, two;
 	int length, lengthprim, lengthresult1, lengthresult2;
 	string znak, znakprim, rule, result1, result2, wynik1, wynik2, wynik3;
 	length = 0;
