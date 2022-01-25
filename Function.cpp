@@ -2,11 +2,11 @@
 #include <fstream>
 #include <sstream> 
 #include <vector>
-#include "FileModel.h"
+#include "Function.h"
 using namespace std;
 vector<pair<float,float>> Openvalues(int &length) {
 	ifstream plik;
-	int one, two;
+	float one, two;
 	string onen, twot;
 	plik.open("Values.txt");
 	if (plik.is_open()) {
@@ -15,8 +15,8 @@ vector<pair<float,float>> Openvalues(int &length) {
 				"some values in the values.txt in pairs, which will allows the program to compare them.";
 		}
 		vector<pair<string, string>>;
-		vector<pair<float, float>> w;
 		plik >> onen >> twot;
+		vector<pair<float, float>> w;
 		do {
 			plik >> one;
 			plik >> two;
@@ -73,7 +73,7 @@ void Variables(vector<pair<float, float>> w,string znak, string znakprim, int le
 					}
 				}
 				if (znakprim == "=") {
-					if (w[j].second = valueprime) {
+					if (w[j].second == valueprime) {
 						firstresult.push_back({ w[j].first, w[j].second });
 						cout << wynik2 << endl;
 					}
@@ -117,7 +117,7 @@ void Variables(vector<pair<float, float>> w,string znak, string znakprim, int le
 					}
 				}
 				if (znakprim == "=") {
-					if (w[j].second = valueprime) {
+					if (w[j].second == valueprime) {
 						firstresult.push_back({ w[j].first, w[j].second });
 						cout << wynik2 << endl;
 					}
@@ -162,7 +162,7 @@ void Variables(vector<pair<float, float>> w,string znak, string znakprim, int le
 					}
 				}
 				if (znakprim == "=") {
-					if (w[j].second = valueprime) {
+					if (w[j].second == valueprime) {
 						firstresult.push_back({ w[j].first, w[j].second });
 						cout << wynik2 << endl;
 					}
@@ -195,7 +195,7 @@ void Variables(vector<pair<float, float>> w,string znak, string znakprim, int le
 		plikprim << firstresult[i].first << " " << firstresult[i].second << endl;
 	}
 	plikprim << wynik3 << endl;
-	for (int i = 0; i < lengthresult1; i++) {
+	for (int i = 0; i < lengthresult2; i++) {
 		plikprim << secondresult[i].first << " " << secondresult[i].second << endl;
 
 	}
