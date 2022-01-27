@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream> 
 #include <vector>
-#include "Function.h"
+#include "FileModel.h"
 using namespace std;
 int main() {
 	float value, valueprime;
@@ -16,6 +16,7 @@ int main() {
 
 	vector<pair<float, float>> firstresult;
 	vector<pair<float, float>> secondresult;
+	vector<pair<float, float>> thirdresult;
 	w=Openvalues(length);
 
 	Setrule(znak, znakprim, test, value, valueprime, wynik1,  wynik2, wynik3);
@@ -25,3 +26,4 @@ int main() {
 
 	return 0;
 }
+
