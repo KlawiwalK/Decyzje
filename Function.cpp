@@ -80,16 +80,6 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 							cout << wynik3 << endl;
 						}
 					}
-					if (znakprim == "=") {
-						if (w[j].second == valueprime) {
-							thirdresult.push_back({ w[j].first, w[j].second });
-							cout << wynik2 << endl;
-						}
-						else {
-							secondresult.push_back({ w[j].first, w[j].second });
-							cout << wynik3 << endl;
-						}
-					}
 					if (znakprim == "<") {
 						if (w[j].second < valueprime) {
 							thirdresult.push_back({ w[j].first, w[j].second });
@@ -104,53 +94,6 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 
 			}
 		}
-
-
-
-		if (znak == "=") { //The same as before, but in case the equality/inequality mark is different, but code will do the same job.
-			for (int j = 0; j < length; j++) {
-				if (w[j].first == value) { //Checks if the first condition is correct.
-					firstresult.push_back({ w[j].first, w[j].second });
-					cout << wynik1 << endl;
-				}
-				else {
-					if (znakprim == ">") { //If not, checks for every other possibility.
-						if (w[j].second > valueprime) {
-							thirdresult.push_back({ w[j].first, w[j].second });
-							cout << wynik2 << endl;
-						}
-						else {
-							cout << wynik3 << endl;
-							secondresult.push_back({ w[j].first, w[j].second });
-						}
-					}
-					if (znakprim == "=") {
-						if (w[j].second == valueprime) {
-							thirdresult.push_back({ w[j].first, w[j].second });
-							cout << wynik2 << endl;
-						}
-						else {
-							cout << wynik3 << endl;
-							secondresult.push_back({ w[j].first, w[j].second });
-						}
-					}
-					if (znakprim == "<") {
-						if (w[j].second < valueprime) {
-							cout << wynik2 << endl;
-							thirdresult.push_back({ w[j].first, w[j].second });
-						}
-						else {
-							cout << wynik3 << endl;
-							secondresult.push_back({ w[j].first, w[j].second });
-						}
-					}
-				}
-
-			}
-		}
-
-
-
 		if (znak == "<") { 
 			for (int j = 0; j < length; j++) {
 
@@ -159,16 +102,6 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 					cout << wynik1 << endl;
 				}
 				else {
-					if (znakprim == ">") {
-						if (w[j].second > valueprime) {
-							thirdresult.push_back({ w[j].first, w[j].second });
-							cout << wynik2 << endl;
-						}
-						else {
-							cout << wynik3 << endl;
-							secondresult.push_back({ w[j].first, w[j].second });
-						}
-					}
 					if (znakprim == "=") {
 						if (w[j].second == valueprime) {
 							thirdresult.push_back({ w[j].first, w[j].second });
@@ -230,16 +163,6 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 							cout << wynik3 << endl;
 						}
 					}
-					if (znakprim == "=") {
-						if (w[j].second == valueprime) {
-							thirdresult.push_back({ w[j].first, w[j].second });
-							cout << wynik2 << endl;
-						}
-						else {
-							secondresult.push_back({ w[j].first, w[j].second });
-							cout << wynik3 << endl;
-						}
-					}
 					if (znakprim == "<") {
 						if (w[j].second < valueprime) {
 							thirdresult.push_back({ w[j].first, w[j].second });
@@ -254,53 +177,6 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 
 			}
 		}
-
-
-
-		if (znak == "=") { 
-			for (int j = 0; j < length; j++) {
-				if (w[j].first < value or w[j].first > value){
-					firstresult.push_back({ w[j].first, w[j].second });
-					cout << test << endl;
-				}
-				else {
-					if (znakprim == ">") { //If not, checks for every other possibility.
-						if (w[j].second > valueprime) {
-							thirdresult.push_back({ w[j].first, w[j].second });
-							cout << wynik2 << endl;
-						}
-						else {
-							cout << wynik3 << endl;
-							secondresult.push_back({ w[j].first, w[j].second });
-						}
-					}
-					if (znakprim == "=") {
-						if (w[j].second == valueprime) {
-							thirdresult.push_back({ w[j].first, w[j].second });
-							cout << wynik2 << endl;
-						}
-						else {
-							cout << wynik3 << endl;
-							secondresult.push_back({ w[j].first, w[j].second });
-						}
-					}
-					if (znakprim == "<") {
-						if (w[j].second < valueprime) {
-							cout << wynik2 << endl;
-							thirdresult.push_back({ w[j].first, w[j].second });
-						}
-						else {
-							cout << wynik3 << endl;
-							secondresult.push_back({ w[j].first, w[j].second });
-						}
-					}
-				}
-
-			}
-		}
-
-
-
 		if (znak == "<") { 
 			for (int j = 0; j < length; j++) {
 
@@ -311,16 +187,6 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 				else {
 					if (znakprim == ">") {
 						if (w[j].second > valueprime) {
-							thirdresult.push_back({ w[j].first, w[j].second });
-							cout << wynik2 << endl;
-						}
-						else {
-							cout << wynik3 << endl;
-							secondresult.push_back({ w[j].first, w[j].second });
-						}
-					}
-					if (znakprim == "=") {
-						if (w[j].second == valueprime) {
 							thirdresult.push_back({ w[j].first, w[j].second });
 							cout << wynik2 << endl;
 						}
