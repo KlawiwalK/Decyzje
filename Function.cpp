@@ -4,32 +4,34 @@
 #include <vector>
 #include "Function.h"
 using namespace std;
-vector<pair<float,float>> Openvalues(int &length) { //Funkcja ma za zadanie zczytać zawartość pliku "wartości".
+vector<pair<float, float>> Openvalues(int& length) { 
 	ifstream plik;
-	float one, two; // Ustalone zostają parametry tymczasowych zmiennych
-	string onen, twot; 
+	float one, two; 
+	string onen, twot;
 	plik.open("Values.txt");
 	if (plik.is_open()) {
-		if (plik.eof() == true) {
-			cout << "If you want to use this properly, then you should put"
-				"some values in the values.txt in pairs, which will allows the program to compare them.";
-		}
-		else {
-			plik >> onen >> twot;
+		if (plik >> onen >> twot) {
 			vector<pair<float, float>> w;
 			do {
 				plik >> one;
 				plik >> two;
-				w.push_back({ one, two }); //Reads data from values.txt to a vector of float pairs, until the file is over.
+				w.push_back({ one, two }); 
 			} while (!plik.eof());
 			length = w.size();
+			length = length - 1;
 			cout << length;
 			return w;
-
 		}
-		
+		else {
+			cout << "If you want to use this properly, then you should put"
+				"some values in the values.txt in pairs, which will allows the program to compare them.";
+			length = 0;
+			vector<pair<float, float>> empty = {};
+			return empty;
+		}
 	}
-}
+}	
+
 void Setrule(string &znak, string &znakprim, string &test, float &value, float &valueprime, string &wynik1, string &wynik2, string &wynik3) {
 	ifstream plikdwa;
 	string rule;
@@ -56,11 +58,11 @@ void Setrule(string &znak, string &znakprim, string &test, float &value, float &
 
 void Variables(vector<pair<float, float>> w,string znak, string test, string znakprim, int length, float value, float valueprime, string wynik1, string wynik2, string wynik3) {
 	ofstream plikprim;
-	plikprim.open("Results.txt"); //Hell begins, here we go...
+	plikprim.open("Results.txt"); 
 	vector<pair<float, float>> firstresult;
 	vector<pair<float, float>> secondresult;
 	vector<pair<float, float>> thirdresult;
-	if (test == "1") {
+	if (test == "1") { //Checks, if the function has to jump in case of a negative or positive solution of the first rule
 		if (znak == ">") { //If mark from the first condition is this one, checks if it is true.
 			for (int j = 0; j < length; j++) {
 				if (w[j].first > value) {
@@ -149,7 +151,7 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 
 
 
-		if (znak == "<") { //And the same for the third possible mark or equality/inequality.
+		if (znak == "<") { 
 			for (int j = 0; j < length; j++) {
 
 				if (w[j].first < value) {
@@ -185,7 +187,7 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 						else {
 							cout << wynik3 << endl;
 							secondresult.push_back({ w[j].first, w[j].second });
-						} //If so, congratulations, it is almost the end of this code.
+						}
 
 					}
 				}
@@ -255,7 +257,7 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 
 
 
-		if (znak == "=") { //The same as before, but in case the equality/inequality mark is different, but code will do the same job.
+		if (znak == "=") { 
 			for (int j = 0; j < length; j++) {
 				if (w[j].first < value or w[j].first > value){
 					firstresult.push_back({ w[j].first, w[j].second });
@@ -299,7 +301,7 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 
 
 
-		if (znak == "<") { //And the same for the third possible mark or equality/inequality.
+		if (znak == "<") { 
 			for (int j = 0; j < length; j++) {
 
 				if (w[j].first > value or w[j].first == value) {
