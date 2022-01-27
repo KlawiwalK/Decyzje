@@ -15,7 +15,6 @@ vector<pair<float,float>> Openvalues(int &length) { //Funkcja ma za zadanie zczy
 				"some values in the values.txt in pairs, which will allows the program to compare them.";
 		}
 		else {
-			vector<pair<string, string>>;
 			plik >> onen >> twot;
 			vector<pair<float, float>> w;
 			do {
