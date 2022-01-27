@@ -4,9 +4,9 @@
 #include <vector>
 #include "Function.h"
 using namespace std;
-vector<pair<float, float>> Openvalues(int& length) { 
+vector<pair<float, float>> Openvalues(int& length) {
 	ifstream plik;
-	float one, two; 
+	float one, two;
 	string onen, twot;
 	plik.open("Values.txt");
 	if (plik.is_open()) {
@@ -15,7 +15,7 @@ vector<pair<float, float>> Openvalues(int& length) {
 			do {
 				plik >> one;
 				plik >> two;
-				w.push_back({ one, two }); 
+				w.push_back({ one, two });
 			} while (!plik.eof());
 			length = w.size();
 			length = length - 1;
@@ -30,9 +30,9 @@ vector<pair<float, float>> Openvalues(int& length) {
 			return empty;
 		}
 	}
-}	
+}
 
-void Setrule(string &znak, string &znakprim, string &test, float &value, float &valueprime, string &wynik1, string &wynik2, string &wynik3) {
+void Setrule(string& znak, string& znakprim, string& test, float& value, float& valueprime, string& wynik1, string& wynik2, string& wynik3) {
 	ifstream plikdwa;
 	string rule;
 	plikdwa.open("Rules.txt");
@@ -56,9 +56,9 @@ void Setrule(string &znak, string &znakprim, string &test, float &value, float &
 
 
 
-void Variables(vector<pair<float, float>> w,string znak, string test, string znakprim, int length, float value, float valueprime, string wynik1, string wynik2, string wynik3) {
+void Variables(vector<pair<float, float>> w, string znak, string test, string znakprim, int length, float value, float valueprime, string wynik1, string wynik2, string wynik3) {
 	ofstream plikprim;
-	plikprim.open("Results.txt"); 
+	plikprim.open("Results.txt");
 	vector<pair<float, float>> firstresult;
 	vector<pair<float, float>> secondresult;
 	vector<pair<float, float>> thirdresult;
@@ -94,7 +94,7 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 
 			}
 		}
-		if (znak == "<") { 
+		if (znak == "<") {
 			for (int j = 0; j < length; j++) {
 
 				if (w[j].first < value) {
@@ -145,74 +145,118 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 
 		}
 	}
-	else{
-		if (znak == ">") { 
-			for (int j = 0; j < length; j++) {
-				if (w[j].first < value or w[j].first==value) {
-					firstresult.push_back({ w[j].first, w[j].second });
-					cout << test << endl;
-				}
-				else {
-					if (znakprim == ">") {
-						if (w[j].second > valueprime) {
-							thirdresult.push_back({ w[j].first, w[j].second });
-							cout << wynik2 << endl;
+	else {
+		if (wynik1 == "1") {
+			if (znak == ">") {
+				for (int j = 0; j < length; j++) {
+					if (w[j].first < value or w[j].first == value) {
+						firstresult.push_back({ w[j].first, w[j].second });
+						cout << test << endl;
+					}
+					else {
+						if (znakprim == ">") {
+							if (w[j].second > valueprime) {
+								thirdresult.push_back({ w[j].first, w[j].second });
+								cout << wynik2 << endl;
+							}
+							else {
+								secondresult.push_back({ w[j].first, w[j].second });
+								cout << wynik3 << endl;
+							}
 						}
-						else {
-							secondresult.push_back({ w[j].first, w[j].second });
-							cout << wynik3 << endl;
+						if (znakprim == "<") {
+							if (w[j].second < valueprime) {
+								thirdresult.push_back({ w[j].first, w[j].second });
+								cout << wynik2 << endl;
+							}
+							else {
+								cout << wynik3 << endl;
+								secondresult.push_back({ w[j].first, w[j].second });
+							}
 						}
 					}
-					if (znakprim == "<") {
-						if (w[j].second < valueprime) {
-							thirdresult.push_back({ w[j].first, w[j].second });
-							cout << wynik2 << endl;
+
+				}
+			}
+			if (znak == "<") {
+				for (int j = 0; j < length; j++) {
+
+					if (w[j].first > value or w[j].first == value) {
+						firstresult.push_back({ w[j].first, w[j].second });
+						cout << test << endl;
+					}
+					else {
+						if (znakprim == ">") {
+							if (w[j].second > valueprime) {
+								thirdresult.push_back({ w[j].first, w[j].second });
+								cout << wynik2 << endl;
+							}
+							else {
+								cout << wynik3 << endl;
+								secondresult.push_back({ w[j].first, w[j].second });
+							}
 						}
-						else {
-							cout << wynik3 << endl;
-							secondresult.push_back({ w[j].first, w[j].second });
+						if (znakprim == "<") {
+							if (w[j].second < valueprime) {
+								thirdresult.push_back({ w[j].first, w[j].second });
+								cout << wynik2 << endl;
+							}
+							else {
+								cout << wynik3 << endl;
+								secondresult.push_back({ w[j].first, w[j].second });
+							}
+
 						}
 					}
+
 				}
+			}
+			int lengthresult1 = firstresult.size();
+			int lengthresult2 = secondresult.size();
+			int lengthresult3 = thirdresult.size();
+			plikprim << test << endl;
+
+			for (int i = 0; i < lengthresult1; i++) {
+				plikprim << firstresult[i].first << " " << firstresult[i].second << endl;
+			}
+			plikprim << wynik3 << endl;
+			for (int i = 0; i < lengthresult2; i++) {
+				plikprim << secondresult[i].first << " " << secondresult[i].second << endl;
 
 			}
+			plikprim << wynik2 << endl;
+			for (int i = 0; i < lengthresult3; i++) {
+				plikprim << thirdresult[i].first << " " << thirdresult[i].second << endl;
+			}
 		}
-		if (znak == "<") { 
-			for (int j = 0; j < length; j++) {
-
-				if (w[j].first > value or w[j].first == value) {
-					firstresult.push_back({ w[j].first, w[j].second });
-					cout << test << endl;
-				}
-				else {
-					if (znakprim == ">") {
-						if (w[j].second > valueprime) {
-							thirdresult.push_back({ w[j].first, w[j].second });
-							cout << wynik2 << endl;
-						}
-						else {
-							cout << wynik3 << endl;
-							secondresult.push_back({ w[j].first, w[j].second });
-						}
+		else {
+			if (znak == ">") {
+				for (int j = 0; j < length; j++) {
+					if (w[j].first < value or w[j].first == value) {
+						firstresult.push_back({ w[j].first, w[j].second });
+						cout << test << endl;
 					}
-					if (znakprim == "<") {
-						if (w[j].second < valueprime) {
-							thirdresult.push_back({ w[j].first, w[j].second });
-							cout << wynik2 << endl;
-						}
-						else {
-							cout << wynik3 << endl;
-							secondresult.push_back({ w[j].first, w[j].second });
-						}
-
+					else {
+						secondresult.push_back({ w[j].first, w[j].second });
+						cout << wynik1 << endl;
 					}
 				}
-
+			}
+			if (znak == "<") {
+				for (int j = 0; j < length; j++) {
+					if (w[j].first > value or w[j].first == value) {
+						firstresult.push_back({ w[j].first, w[j].second });
+						cout << test << endl;
+					}
+					else {
+						secondresult.push_back({ w[j].first, w[j].second });
+						cout << wynik1 << endl;
+					}
+				}
 			}
 		}
 		int lengthresult1 = firstresult.size();
 		int lengthresult2 = secondresult.size();
-		int lengthresult3 = thirdresult.size();
 		plikprim << test << endl;
 
 		for (int i = 0; i < lengthresult1; i++) {
@@ -223,10 +267,6 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 			plikprim << secondresult[i].first << " " << secondresult[i].second << endl;
 
 		}
-		plikprim << wynik2 << endl;
-		for (int i = 0; i < lengthresult3; i++) {
-			plikprim << thirdresult[i].first << " " << thirdresult[i].second << endl;
-		}
 	}
+			
 }
-
