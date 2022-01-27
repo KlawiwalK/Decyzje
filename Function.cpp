@@ -107,7 +107,7 @@ void Variables(vector<pair<float, float>> w,string znak, string test, string zna
 
 		if (znak == "=") { //The same as before, but in case the equality/inequality mark is different, but code will do the same job.
 			for (int j = 0; j < length; j++) {
-				if (w[j].first = value) { //Checks if the first condition is correct.
+				if (w[j].first == value) { //Checks if the first condition is correct.
 					firstresult.push_back({ w[j].first, w[j].second });
 					cout << wynik1 << endl;
 				}
