@@ -39,7 +39,7 @@ void Setrule(string& znak, string& znakprim, string& test, float& value, float& 
 	vector<string> p;
 	do {
 		plikdwa >> rule;
-		p.push_back({ rule }); // Reads data from rules.txt to a vector of strings, which will be used for the Grand Finale of this code.
+		p.push_back({ rule }); // Reads data from rules.txt to a vector of strings.
 	} while (!plikdwa.eof());
 
 	znak = p[2]; //Types the equality or inequality mark from the first condition into a "znak" variable
