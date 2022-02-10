@@ -4,47 +4,25 @@
 #include <sstream> 
 #include <vector>
 #include <string>
+#include <map>
 using namespace std;
+struct Rule {
+    bool greater;
+    double compare;
+    string value;
+    string positive;
+    string negative;
+};
 
-/**Funkcja pobiera zawartość pliku "wartości", a następnie zczytuje je do wektora par.
-Pierwsze dwa elementy są usuwane, albowiem zawierają one wartość typu string, która opisuje zmienną.
-Pozostałe elementy są zczytywane do końca pliku, a następnie przekazywane dalej w formie wektora.
-@param length określa długość zwracanego wektora.
-@return vector<pair<float, float> w **/
+map<string, vector<double>> Openvalues(int& e, int& mapl,  vector<string>& line);
+/**/
 
-vector<pair<float, float>> Openvalues(int& length);
+map<string, Rule> Setrule();
+/**/
 
-/**Drzewko zasad jest drzewem binarnym, co oznacza, iż w przypadku spełnienia, bądź niespełnienia warunku 0,
-może zostać wykonany warunek 1. Setrule rozdziela poszczególne elementy drzewka zasad na pojedyncze elementy,
-a następnie przekazuje je dalej w formie ustalonych zmiennych.
-@param znak określa rodzaj znaku dla warunku "0" (Mniejszości, większości lub równości).
-@param znakprim określa rodzaj znaku dla warunku "1" (Mniejszości, większości lub równości).
-@param test jest rezultatem niespełnienia warunku "0".
-@param value jest wartością, do której porównane zostaną parametry na pierwszym miejscu z wektora w.
-@param valueprime jest wartością, do której porównane zostaną parametry na drugim miejscu z wektora w.
-@param wynik1 jest rezultatem spełnienia warunku "0".
-@param wynik2 jest rezultatem spełnienia warunku "1".
-@param wynik3 jest rezultatem niespełnienia warunku "1".
-@return 0 **/
+string Applyrule(map<string, Rule>& rules, map<string, vector<double>>& values, string ruleNumber, const int i);
 
-void Setrule(string& znak, string& znakprim, string& test, float& value, float& valueprime, string& wynik1, string& wynik2, string& wynik3);
-
-
-/** Funkcja sprawdza, który warunek 0 musi zostać spełniony, żeby można było przejść do warunku 1, a następnie 
-sprawdza, które warunki zostały spełnione, w zależności od podanych paramertów oraz znaków mniejszości, równości lub
-większości.
-@param vector<pair<float, float>> w jest wektorem zawierającym wartości z pliku "Values".
-@param znak określa rodzaj znaku dla warunku "0" (Mniejszości, większości lub równości).
-@param znakprim określa rodzaj znaku dla warunku "1" (Mniejszości, większości lub równości).
-@param length określa długość zwracanego wektora.
-@param test jest rezultatem niespełnienia warunku "0".
-@param value jest wartością, do której porównane zostaną parametry na pierwszym miejscu z wektora w.
-@param valueprime jest wartością, do której porównane zostaną parametry na drugim miejscu z wektora w.
-@param wynik1 jest rezultatem spełnienia warunku "0".
-@param wynik2 jest rezultatem spełnienia warunku "1".
-@param wynik3 jest rezultatem niespełnienia warunku "1".
-@return 0 **/
-
-void Variables(vector<pair<float, float>> w, string znak, string test, string znakprim, int length, float value, float valueprime, string wynik1, string wynik2, string wynik3);
+void Variables(map<string, vector<double>> values, map<string, Rule>& rules, int e, vector<string>& line);
+/**/
 
 
