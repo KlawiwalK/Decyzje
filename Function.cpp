@@ -9,7 +9,7 @@ map<string, vector<double>> Openvalues(int& e, int& mapl, vector<string>& line) 
 	map<string, vector<double>> values;
 	ifstream plik;
 	double one;
-	string str, onen;
+	string str, onen, Values;
 	plik.open(Values);
 
 	if (plik.is_open()) {
@@ -55,8 +55,8 @@ map<string, vector<double>> Openvalues(int& e, int& mapl, vector<string>& line) 
 
 map<string, Rule> Setrule() {
 	ifstream plikdwa;
-	string rule;
-	plikdwa.open("Rules.txt");
+	string rule, Rules;
+	plikdwa.open(Rules);
 	map<string, Rule> p;
 	bool greater;
 	double compare;
@@ -109,7 +109,8 @@ string Applyrule(map<string, Rule>& rules, map<string, vector<double>>& values, 
 void Variables(map<string, vector<double>> values, map<string, Rule>& rules, int e,  vector<string>& line) {
 	map<string, vector<int>> results;
 	ofstream plik;
-	plik.open("Results.txt");
+	string Results;
+	plik.open(Results);
 	cout << e;
 	for (int i = 0; i < e; i++) {
 		results[Applyrule(rules, values, "0", i)].push_back(i);
