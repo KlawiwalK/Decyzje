@@ -14,16 +14,15 @@ struct Rule {
     string negative;
 };
 
-map<string, vector<double>> Openvalues(int& e, int& mapl,  vector<string>& line);
+map<string, vector<double>> Openvalues(int& e, int& mapl, string& Values, vector<string>& line);
 /**/
 
-map<string, Rule> Setrule();
+map<string, Rule> Setrule(string &Rules);
 /**/
 
 string Applyrule(map<string, Rule>& rules, map<string, vector<double>>& values, string ruleNumber, const int i);
 
-void Variables(map<string, vector<double>> values, map<string, Rule>& rules, int e, vector<string>& line);
+void Variables(string &Results, map<string, vector<double>> values, map<string, Rule>& rules, int e, vector<string>& line);
 /**/
-
 
 
