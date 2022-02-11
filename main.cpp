@@ -3,23 +3,29 @@
 #include <sstream> 
 #include <vector>
 #include <map>
-#include "FileModel.h"
+#include "Function.h"
 using namespace std;
 int main(int argc, char* argv[]) {     
-	// -i -o -p
-	if (argc != 3) {
-		return 0; // Jeśli nie podadzą dwóch plików, cała funkcja się kończy, zanim się zacznie
-	}
 	map<string, vector<double>> values;
 	map<string, Rule> rules;
 	double value;
-	int e, mapl; //mapl sprawdza, czy plik Values nie jest pusty
-	string Values, Rules, Results, filename1, filename2, filename3, testow, test, wynik;
+	int e, mapl;
+	string Values, Rules, Results, wynik;
 	value = 0;
 	vector<string> line;
-	Values = argv[0];
-	Rules = argv[1];
-	Results = argv[2];
+	argc = 7;
+	for (int i = 0; i < argc; i++) {
+		if (argv[i] == "-p"){
+			Rules = string(argv[i + 1]);
+		}
+		if (argv[i] == "-i") {
+			Values = string(argv[i + 1]);
+		}
+		if (argv[i] == "-o") {
+			Results = string(argv[i + 1]);
+		}
+	}
+	cout << "Test działania";
 	values=Openvalues( e, mapl, line);
 	cout << "test 1";
 	if (mapl == 0) {
