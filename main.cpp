@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	cout << "Test działania";
-	values=Openvalues( e, mapl, line);
+	values=Openvalues( e, mapl, Values, line);
 	cout << "test 1";
 	if (mapl == 0) {
 		ofstream plik;
@@ -35,10 +35,10 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 
-	rules=Setrule();
+	rules=Setrule(Rules);
 	cout << "test2";
 
-	Variables(values,rules,e, line);
+	Variables(Results, values,rules,e, line);
 	cout << "test3";
 
 	return 0;
