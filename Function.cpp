@@ -5,14 +5,14 @@
 #include "Function.h"
 #include <map>
 using namespace std;
-map<string, vector<double>> Openvalues(int& e, int& mapl, vector<string>& line) {
+map<string, vector<double>> Openvalues(int& e, int& mapl, string& Values, vector<string>& line) {
 	map<string, vector<double>> values;
 	ifstream plik;
 	double one;
-	string str, onen, Values;
+	string str, onen;
 	plik.open(Values);
-
 	if (plik.is_open()) {
+		cout << "Czy to działa?";
 		mapl = 0;
 		if (getline(plik, str)) {
 			stringstream decoder;
@@ -53,9 +53,9 @@ map<string, vector<double>> Openvalues(int& e, int& mapl, vector<string>& line) 
 }
 
 
-map<string, Rule> Setrule() {
+map<string, Rule> Setrule(string & Rules) {
 	ifstream plikdwa;
-	string rule, Rules;
+	string rule;
 	plikdwa.open(Rules);
 	map<string, Rule> p;
 	bool greater;
@@ -106,10 +106,9 @@ string Applyrule(map<string, Rule>& rules, map<string, vector<double>>& values, 
 }
 
 
-void Variables(map<string, vector<double>> values, map<string, Rule>& rules, int e,  vector<string>& line) {
+void Variables(string& Results, map<string, vector<double>> values, map<string, Rule>& rules, int e, vector<string>& line) {
 	map<string, vector<int>> results;
 	ofstream plik;
-	string Results;
 	plik.open(Results);
 	cout << e;
 	for (int i = 0; i < e; i++) {
