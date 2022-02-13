@@ -15,13 +15,13 @@ int main(int argc, char* argv[]) {
 	vector<string> line;
 	argc = 7;
 	for (int i = 0; i < argc; i++) {
-		if (argv[i] == "-p"){
+		if ((argv[i],"-p")=0=0{
 			Rules = string(argv[i + 1]);
 		}
-		if (argv[i] == "-i") {
+		if ((argv[i], "-i")==0) {
 			Values = string(argv[i + 1]);
 		}
-		if (argv[i] == "-o") {
+		if ((argv[i], "-o")==0) {
 			Results = string(argv[i + 1]);
 		}
 	}
