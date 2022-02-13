@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream> 
 #include <vector>
-#include "FileModel.h"
+#include "Function.h"
 #include <map>
 using namespace std;
 map<string, vector<double>> Openvalues(int& e, int& mapl, string& Values, vector<string>& line) {
