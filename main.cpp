@@ -13,33 +13,54 @@ int main(int argc, char* argv[]) {
 	string Values, Rules, Results, wynik;
 	value = 0;
 	vector<string> line;
-	argc = 7;
-	for (int i = 0; i < argc; i++) {
-		if ((argv[i],"-p")==0{
-			Rules = string(argv[i + 1]);
-		}
-		if ((argv[i], "-i")==0) {
-			Values = string(argv[i + 1]);
-		}
-		if ((argv[i], "-o")==0) {
-			Results = string(argv[i + 1]);
-		}
-	}
+    if (argc == 7) {
+        for (int i = 1;i < argc;i++) {
+            if (string(argv[i]) == "-i") {
+                if (argv[i + 1] != ("")) {
+                    Values = argv[i + 1];
+                    i++;
+                }
+                else {
+                    std::cout << "Brak parametru -i" << endl;
+                }
+            }
+            else if (string(argv[i]) == "-o") {
+                if (argv[i + 1] != "") {
+                    Results = argv[i + 1];
+                    i++;
+                }
+                else {
+                    cout << "Brak parametru -o" << endl;
+                }
+            }
+            else if (string(argv[i]) == "-t") {
+                if (argv[i + 1] != "") {
+                    Rules = argv[i + 1];
+                    i++;
+                }
+                else {
+                    cout << "Brak parametru -t" << endl;
+                }
+            }
+        }
+    }
+    else {
+        cout << "Podano bledna ilosc parametrow" << endl;
+        return 0;
+    }
 	cout << "Test działania";
 	values=Openvalues( e, mapl, Values, line);
-	cout << "test 1";
+
 	if (mapl == 0) {
 		ofstream plik;
 		plik.open("Results.txt");
 		plik << "Wrong data";
 		return 0;
 	}
-
+    cout << "test zeber";
 	rules=Setrule(Rules);
-	cout << "test2";
 
 	Variables(Results, values,rules,e, line);
-	cout << "test3";
 
 	return 0;
 }
