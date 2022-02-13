@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream> 
 #include <vector>
-#include "Function.h"
+#include "FileModel.h"
 #include <map>
 using namespace std;
 map<string, vector<double>> Openvalues(int& e, int& mapl, string& Values, vector<string>& line) {
@@ -32,6 +32,7 @@ map<string, vector<double>> Openvalues(int& e, int& mapl, string& Values, vector
 				e++;
 			} while (!plik.eof());
 			mapl = values.size();
+			plik.close();
 			return values;
 		}
 		else {
@@ -47,6 +48,7 @@ map<string, vector<double>> Openvalues(int& e, int& mapl, string& Values, vector
 				e++;
 			} while (!plik.eof());
 			mapl = 0;
+			plik.close();
 			return values;
 		}
 	}
@@ -68,6 +70,7 @@ map<string, Rule> Setrule(string & Rules) {
 		else greater = false;
 		p[key] = { greater, compare, value, positive, negative };
 	}
+	plikdwa.close();
 	return p;
 }
 
@@ -124,4 +127,5 @@ void Variables(string& Results, map<string, vector<double>> values, map<string, 
 			plik << endl;
 		}
 	}
+	plik.close();
 }
