@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
 	vector<string> line;
 	argc = 7;
 	for (int i = 0; i < argc; i++) {
-		if ((argv[i],"-p")=0=0{
+		if ((argv[i],"-p")==0{
 			Rules = string(argv[i + 1]);
 		}
 		if ((argv[i], "-i")==0) {
