@@ -119,7 +119,7 @@ void Variables(string& Results, map<string, vector<double>> values, map<string, 
 		plik << res.first << endl;
 		for (auto k : res.second) {
 			for (auto name : line) {
-				plik << values[name][k];
+				plik << values[name][k]<<" ";
 			}
 			plik << endl;
 		}
