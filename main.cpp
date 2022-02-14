@@ -5,14 +5,14 @@
 #include <map>
 #include "Function.h"
 using namespace std;
-int main(int argc, char* argv[]) {     
-	map<string, vector<double>> values;
-	map<string, Rule> rules;
-	double value;
-	int e, mapl;
-	string Values, Rules, Results, wynik;
-	value = 0;
-	vector<string> line;
+int main(int argc, char* argv[]) {
+    map<string, vector<double>> values;
+    map<string, Rule> rules;
+    double value;
+    int e, mapl;
+    string Values, Rules, Results, wynik;
+    value = 0;
+    vector<string> line;
     if (argc == 7) {
         for (int i = 1;i < argc;i++) {
             if (string(argv[i]) == "-i") {
@@ -22,6 +22,7 @@ int main(int argc, char* argv[]) {
                 }
                 else {
                     std::cout << "Brak parametru -i" << endl;
+                    return 0;
                 }
             }
             else if (string(argv[i]) == "-o") {
@@ -31,6 +32,7 @@ int main(int argc, char* argv[]) {
                 }
                 else {
                     cout << "Brak parametru -o" << endl;
+                    return 0;
                 }
             }
             else if (string(argv[i]) == "-t") {
@@ -40,6 +42,7 @@ int main(int argc, char* argv[]) {
                 }
                 else {
                     cout << "Brak parametru -t" << endl;
+                    return 0;
                 }
             }
         }
@@ -48,20 +51,17 @@ int main(int argc, char* argv[]) {
         cout << "Podano bledna ilosc parametrow" << endl;
         return 0;
     }
-	cout << "Test działania";
-	values=Openvalues( e, mapl, Values, line);
+    values = Openvalues(e, mapl, Values, line);
 
-	if (mapl == 0) {
-		ofstream plik;
-		plik.open("Results.txt");
-		plik << "Wrong data";
-		return 0;
-	}
-    cout << "test zeber";
-	rules=Setrule(Rules);
+    if (mapl == 0) {
+        ofstream plik;
+        plik.open("Results.txt");
+        plik << "Wrong data";
+        return 0;
+    }
+    rules = Setrule(Rules);
 
-	Variables(Results, values,rules,e, line);
+    Variables(Results, values, rules, e, line);
 
-	return 0;
+    return 0;
 }
-
