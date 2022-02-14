@@ -8,11 +8,9 @@ using namespace std;
 map<string, vector<double>> Openvalues(int& e, int& mapl, string& Values, vector<string>& line) {
 	map<string, vector<double>> values;
 	ifstream plik;
-	double one;
 	string str, onen;
-	plik.open(Values);
+	plik.open(Values.c_str());
 	if (plik.is_open()) {
-		cout << "Czy to działa?";
 		mapl = 0;
 		if (getline(plik, str)) {
 			stringstream decoder;
@@ -55,10 +53,10 @@ map<string, vector<double>> Openvalues(int& e, int& mapl, string& Values, vector
 }
 
 
-map<string, Rule> Setrule(string & Rules) {
+map<string, Rule> Setrule(string& Rules) {
 	ifstream plikdwa;
 	string rule;
-	plikdwa.open(Rules);
+	plikdwa.open(Rules.c_str());
 	map<string, Rule> p;
 	bool greater;
 	double compare;
@@ -78,17 +76,14 @@ map<string, Rule> Setrule(string & Rules) {
 string Applyrule(map<string, Rule>& rules, map<string, vector<double>>& values, string ruleNumber, const int i) {
 	cout << ruleNumber << i << endl;
 	if (rules.find(ruleNumber) != rules.end()) {
-		cout << "try";
 		Rule r = rules[ruleNumber];
 		cout << endl << r.greater << " " << r.compare << " " << r.value << " " << r.positive << " " << r.negative;
 		if (r.greater) {
 			cout << endl << values[r.value][0] << " " << values[r.value][i];
 			if (values[r.value][i] < r.compare) {
-				cout << "1";
 				return Applyrule(rules, values, r.positive, i);
 			}
 			else {
-				cout << "2";
 				return Applyrule(rules, values, r.negative, i);
 			}
 		}
@@ -103,7 +98,6 @@ string Applyrule(map<string, Rule>& rules, map<string, vector<double>>& values, 
 		}
 	}
 	else {
-		cout << "tryno";
 		return ruleNumber;
 	}
 }
@@ -112,17 +106,16 @@ string Applyrule(map<string, Rule>& rules, map<string, vector<double>>& values, 
 void Variables(string& Results, map<string, vector<double>> values, map<string, Rule>& rules, int e, vector<string>& line) {
 	map<string, vector<int>> results;
 	ofstream plik;
-	plik.open(Results);
+	plik.open(Results.c_str());
 	cout << e;
 	for (int i = 0; i < e; i++) {
 		results[Applyrule(rules, values, "0", i)].push_back(i);
 	}
-	cout << "testapp";
 	for (auto res : results) {
 		plik << res.first << endl;
 		for (auto k : res.second) {
 			for (auto name : line) {
-				plik << values[name][k]<<" ";
+				plik << values[name][k] << " ";
 			}
 			plik << endl;
 		}
